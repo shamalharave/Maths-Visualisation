@@ -1,0 +1,589 @@
+/* Custom font import*/
+    @font-face {
+      font-family: 'GeostarFill';
+      src: url('assets/GeostarFill-Regular.ttf') format('truetype');
+    }
+
+    /* Main body styling - centered layout */
+    body {
+      margin: 0;
+      font-family: 'GeostarFill', sans-serif;
+      display: flex;
+      background-color: #0a0a28;
+      color: #fff;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Main container that holds all three sections (left panel, game, right panel) */
+    #main-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+    }
+
+    /* Container specifically for the game canvas */
+    #game-container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Styling for the p5.js game canvas */
+    canvas {
+      display: block;
+      border: 4px solid rgb(0, 255, 255);
+    }
+
+    /* Base styling for both left and right side panels */
+    .side-panel {
+      width: 220px;
+      padding: 15px;
+      background: linear-gradient(to bottom right, #222, #333);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 12px;
+      border: 4px solid rgb(0, 255, 255);
+      font-family: 'GeostarFill', sans-serif;
+      position: relative;
+      height: 608px;
+      box-sizing: border-box;
+    }
+
+    /* Content area within each side panel */
+    .content-area {
+      flex: 1;
+      width: 160px;
+    }
+
+    /* Specific styling for right panel content area */
+    #right-panel .content-area {
+      width: 140px;
+      margin-left: 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    /* Player information display*/
+    .player-info {
+      text-align: left;
+      margin-bottom: 5px;
+    }
+
+    .player-info h3 {
+      margin: 0 0 3px 0;
+      font-size: 16px;
+    }
+
+    .player-info p {
+      margin: 0;
+      font-size: 12px;
+    }
+
+    /* Player 1 colour (red coins) */
+    .player-info .red {
+      color: #ff4444;
+    }
+
+    /* Player 2 colour (blue coins) */
+    .player-info .blue {
+      color: #4488ff;
+    }
+
+    /* Divider between player information sections */
+    .player-divider {
+      padding-top: 8px;
+      margin-top: 8px;
+      width: 88%;
+    }
+
+    /* Base styling for all control buttons */
+    .control-btn {
+      padding: 10px 10px;
+      background: linear-gradient(145deg, #0066cc, #004499);
+      border: 2px solid;
+      border-image: linear-gradient(45deg, #0088ff, #00aaff) 1;
+      color: white;
+      border-radius: 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'GeostarFill', sans-serif;
+      font-size: 12px;
+      width: 140px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 5px;
+    }
+
+    /* Centre alignment for right panel buttons */
+    #right-panel .control-btn {
+      text-align: center;
+    }
+
+    /* Feature section styling for right panel */
+    #right-panel .feature-section {
+      text-align: center;
+      border-top: none;
+      margin-top: 0px;
+      padding-top: 6px;
+      width: 100%;
+    }
+
+    #right-panel .feature-section h4 {
+      margin: -2px 0 10px 0;
+      font-size: 12px;
+      color: #00ff88;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+
+    /* Shine effect for buttons */
+    .control-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    /* Hover effect - triggers shine animation */
+    .control-btn:hover::before {
+      left: 100%;
+    }
+
+    /* Button hover state*/
+    .control-btn:hover {
+      background: linear-gradient(145deg, #0088ff, #0066cc);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+
+    /* Selected button state */
+    .control-btn.active {
+      background: linear-gradient(145deg, #00bbff, #0088cc);
+      transform: translateY(-1px);
+      box-shadow: 0 0 15px rgba(0, 187, 255, 0.6), 0 4px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(255,255,255,0.8);
+    }
+
+    /* Button pressed state */
+    .control-btn:active {
+      /*transform: translateY(0);*/
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    /* INDIVIDUAL BUTTON STYLING - Each button has unique colors and effects */
+    
+    /* Pause Button - orange */
+    #pauseBtn {
+      background: linear-gradient(145deg, #cc6600, #994400);
+      border-image: linear-gradient(45deg, #cc6600, #994400) 1;
+    }
+
+    #pauseBtn:hover {
+      background: linear-gradient(145deg, #ff8800, #cc6600);
+    }
+
+    #pauseBtn.active {
+      background: linear-gradient(145deg, #ffaa00, #ff8800);
+      box-shadow: 0 0 15px rgba(255, 170, 0, 0.6), 0 4px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+      text-shadow: 0 0 8px rgba(255,255,255,0.8);
+    }
+
+    /* Laser Aim Button - Green theme with red text when active */
+    #laserAimBtn {
+      background: linear-gradient(145deg, #00cc66, #009944);
+      border-image: linear-gradient(45deg, #00cc66, #009944) 1;
+    }
+
+    #laserAimBtn:hover {
+      background: linear-gradient(145deg, #00ff88, #00cc66);
+    }
+
+    #laserAimBtn.active {
+      background: linear-gradient(145deg, #00ffaa, #00ff88);
+      box-shadow: 0 0 15px rgba(0, 255, 170, 0.6), 0 4px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+      text-shadow: 0 0 8px rgba(0,0,0,0.8);
+      color: #ff0000;
+    }
+
+    /* Inverted Controls Button - pinkish red theme */
+    #invertedControlsBtn {
+      background: linear-gradient(145deg, #cc3366, #993344);
+      border-image: linear-gradient(45deg, #cc3366, #993344) 1;
+    }
+
+    #invertedControlsBtn:hover {
+      background: linear-gradient(145deg, #ff5588, #cc3366);
+    }
+
+    #invertedControlsBtn.active {
+      background: linear-gradient(145deg, #ff77aa, #ff5588);
+      box-shadow: 0 0 15px rgba(255, 119, 170, 0.6), 0 4px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+      text-shadow: 0 0 8px rgba(255,255,255,0.8);
+    }
+
+    /* Glitch Mode Button - light blue theme with black text */
+    #glitchBtn {
+      background: linear-gradient(145deg, #00cccc, #0099aa);
+      border-image: linear-gradient(45deg, #000000, #333333) 1;
+      color: black;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+    }
+
+    #glitchBtn:hover {
+      background: linear-gradient(145deg, #069E9E, #04F3F3);
+    }
+
+    #glitchBtn.active {
+      background: linear-gradient(145deg, #33ffff, #00ffff);
+      border-image: linear-gradient(45deg, #78F3F3, #FFFFFF) 1;
+      box-shadow: 0 0 15px rgba(51, 255, 255, 0.6), 0 4px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+      text-shadow: 0 0 0px rgba(0,0,0,0.8);
+      color: black;
+    }
+
+    /* Bomb Button - Dark theme with orange text */
+    #bombBtn {
+      background: linear-gradient(145deg, #333333, #111111);
+      border-image: linear-gradient(45deg, #0E0E0D, #81807A) 1;
+      color: #ffaa00;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+    }
+
+    #bombBtn:hover {
+      background: linear-gradient(145deg, #444444, #222222);
+      color: #ffcc00;
+    }
+
+    #bombBtn.active {
+      background: linear-gradient(145deg, #555555, #333333);
+      border-image: linear-gradient(45deg, #ffaa00, #ffcc00) 1;
+      box-shadow: 0 0 15px rgba(255, 170, 0, 0.6), 0 4px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+      text-shadow: 0 0 8px rgba(255, 204, 0, 0.8);
+      color: #ffdd00;
+    }
+
+    /* Drunkenness Button - Red theme */
+    #drunkennessBtn {
+      background: linear-gradient(145deg, #cc0000, #990000);
+      border-image: linear-gradient(45deg, #cc0000, #990000) 1;
+      color: #FFFFFF;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+    }
+
+    #drunkennessBtn:hover {
+      background: linear-gradient(145deg, #ff0000, #cc0000);
+      color: #ffffff;
+    }
+
+    #drunkennessBtn.active {
+      background: linear-gradient(145deg, #ff3333, #ff0000);
+      border-image: linear-gradient(45deg, #cccccc, #ffffff) 1;
+      box-shadow: 0 0 15px rgba(255, 51, 51, 0.6), 0 4px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+      text-shadow: 0 0 8px rgba(255,255,255,0.8);
+      color: #ffffff;
+    }
+
+    /* Timer Button - Red base*/
+    #timerBtn {
+      background: linear-gradient(145deg, #cc0000, #990000);
+      border-image: linear-gradient(45deg, #070707, #C44E26) 1;
+      color: #0B0C0B;
+      text-shadow: 0 0px 0px rgba(0,0,0,0.8);
+    }
+
+    #timerBtn:hover {
+      background: linear-gradient(145deg, #ff0000, #cc0000);
+      
+    }
+
+    #timerBtn.active {
+      background: linear-gradient(145deg, #ff3333, #ff0000);
+      border-image: linear-gradient(45deg, #00ff00, #00ff00) 1;
+      box-shadow: 0 0 15px rgba(255, 51, 51, 0.6), 0 4px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+      text-shadow: 0 0 8px rgba(51, 255, 51, 0.8);
+      color: #66ff66;
+    }
+
+    /* Screenshake Button - Pink theme */
+    #screenshakeBtn {
+      background: linear-gradient(145deg, #cc0066, #990044);
+      border-image: linear-gradient(45deg, #cc0066, #990044) 1;
+    }
+
+    #screenshakeBtn:hover {
+      background: linear-gradient(145deg, #ff0088, #cc0066);
+    }
+
+    #screenshakeBtn.active {
+      background: linear-gradient(145deg, #ff00aa, #ff0088);
+      border-image: linear-gradient(45deg, #cccccc, #ffffff) 1;
+      box-shadow: 0 0 15px rgba(255, 0, 170, 0.6), 0 4px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+      text-shadow: 0 0 8px rgba(255,255,255,0.8);
+    }
+
+    /* No Skill Button - Purple theme */
+    #noSkillBtn {
+      background: linear-gradient(145deg, #6600cc, #440099);
+      border-image: linear-gradient(45deg, #6600cc, #440099) 1;
+    }
+
+    #noSkillBtn:hover {
+      background: linear-gradient(145deg, #8800ff, #6600cc);
+    }
+
+    #noSkillBtn.active {
+      background: linear-gradient(145deg, #aa00ff, #8800ff);
+      border-image: linear-gradient(45deg, #F6F2F8, #F6F0F7) 1;
+      box-shadow: 0 0 15px rgba(170, 0, 255, 0.6), 0 4px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+      text-shadow: 0 0 8px rgba(255,255,255,0.8);
+    }
+
+    /* Sticky Zones Button - Brown/orange theme with green text */
+    #stickyBtn {
+      background: linear-gradient(145deg, #8B4513, #A0522D);
+      border-image: linear-gradient(45deg, #D2691E, #CD853F) 1;
+      color: #C5FA81;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+    }
+
+    #stickyBtn:hover {
+      background: linear-gradient(145deg, #A0522D, #8B4513);
+      color: #90FD04;
+    }
+
+    #stickyBtn.active {
+      background: linear-gradient(145deg, #D2691E, #CD853F);
+      border-image: linear-gradient(45deg, #20F508, #90FD04) 1;
+      box-shadow: 0 0 15px rgba(210, 105, 30, 0.6), 0 4px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+      color: #90FD04;
+    }
+
+    /* Wormhole Button - Yellow/lime theme */
+    #wormholeBtn {
+      background: linear-gradient(145deg, #AAC406, #D7FA01);
+      border-image: linear-gradient(45deg, #050505, #050505) 1;
+      color: #050505;
+      text-shadow: 0 0 8px rgba(255,255,255,0.8);
+    }
+
+    #wormholeBtn:hover {
+      background: linear-gradient(145deg, #DAFC05, #DAFC05);
+      color: #080809;
+      text-shadow: 0 0 8px rgba(255,255,255,0.8);
+    }
+
+    #wormholeBtn.active {
+      background: linear-gradient(145deg, #D7F805, #E7F87B);
+      border-image: linear-gradient(45deg, #6565F8, #E8E7F5) 1;
+      text-shadow: 0 0 8px rgba(255,255,255,0.8);
+      color: #2705F8;
+    }
+
+    /* Wobbly Board Button - Blue theme */
+    #wobblyBoardBtn {
+      background: linear-gradient(145deg, #025B79, #05A7EB);
+      border-image: linear-gradient(45deg, #058CF8, #058CF8) 1;
+      color: #F8F5F8;
+      text-shadow: 0 0 0px rgba(255,255,255,0.8);
+    }
+
+    #wobblyBoardBtn:hover {
+      background: linear-gradient(145deg, #068FB4, #05B6A6);
+      color: #F8F5F8;
+      text-shadow: 0 0 0px rgba(255,255,255,0.8);
+    }
+
+    #wobblyBoardBtn.active {
+      background: linear-gradient(145deg, #0470CE, #0792F8);
+      border-image: linear-gradient(45deg, #9AD0FC, #F9FCFF) 1;
+      text-shadow: 0 0 0px rgba(255,255,255,0.8);
+      color: #F8F5F8;
+    }
+
+    /* Trampoline/Bounce Pads Button - Pink/purple theme with green text */
+    #trampolineBtn {
+      background: linear-gradient(145deg, #990788, #F33ADE);
+      border-image: linear-gradient(45deg, #66049B, #8104D3) 1;
+      color: #3FFF08;
+      text-shadow: 0 0 0px rgba(255,255,255,0.8);
+    }
+
+    #trampolineBtn:hover {
+      background: linear-gradient(145deg, #F805DC, #EB74DD);
+      color: #F8F5F8;
+      text-shadow: 0 0 0px rgba(255,255,255,0.8);
+    }
+
+    #trampolineBtn.active {
+      background: linear-gradient(145deg, #F805DC, #EB74DD);
+      border-image: linear-gradient(45deg, #47F814, #BCF5AC) 1;
+      text-shadow: 0 0 0px rgba(255,255,255,0.8);
+      color: #3FFF08;
+    }
+
+    /* Aim Assist Button - Blue theme with black text when active */
+    #aimAssistBtn {
+      background: linear-gradient(145deg, #0066cc, #004499);
+      border-image: linear-gradient(45deg, #003366, #004499) 1;
+    }
+
+    #aimAssistBtn:hover {
+      background: linear-gradient(145deg, #0088ff, #0066cc);
+    }
+
+    #aimAssistBtn.active {
+      background: linear-gradient(145deg, #00bbff, #0088cc);
+      box-shadow: 0 0 15px rgba(0, 187, 255, 0.6), 0 4px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+      text-shadow: 0 0 8px rgba(0,0,0,0.8);
+      color: black;
+    }
+
+    /* POWER BAR STYLING - Vertical bars showing shot power */
+    .power-bar {
+      position: absolute;
+      top: 15px;
+      width: 25px;
+      height: 560px;
+      background: linear-gradient(to bottom, #333, #222);
+      border: 2px solid #555;
+      overflow: hidden;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    /* Left panel power bar positioning */
+    #power-bar-left {
+      right: 15px;
+    }
+
+    /* Right panel power bar positioning */
+    #power-bar-right {
+      left: 15px;
+    }
+
+    /* Animated fill for power bars - changes color based on power level */
+    .power-fill {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(to top, 
+        #00ff00 0%, 
+        #88ff00 25%, 
+        #ffff00 50%, 
+        #ff8800 75%, 
+        #ff0000 100%);
+      transition: height 0.1s ease-out;
+    }
+
+    /* Feature section containers */
+    .feature-section {
+      text-align: left;
+      border-top: 2px solid #444;
+      margin-top: 12px;
+      padding-top: 6px;
+      width: 88%;
+    }
+
+    .feature-section h4 {
+      margin: 5px 0 10px 0;
+      font-size: 12px;
+      color: #ccc;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+
+    /* Copyright notice at bottom of left panel */
+    .copyright {
+      position: absolute;
+      bottom: 4px;
+      left: 8px;
+      font-size: 11px;
+      color: rgb(0,255,244);
+      text-shadow: 0 0 3px #000;
+    }
+    
+    /* STRIKER ICON SELECTION SYSTEM */
+    .striker-icons-section h3 {
+      color: #00ff88;
+      margin: 8px 0 10px 0;
+      font-size: 12px;
+      text-align: left;
+    }
+
+    /* Grid layout for striker icon selection */
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      width: 100%;
+      max-width: 150px;
+    }
+
+    /* Individual icon items in the grid */
+    .icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 4px;
+      border-radius: 4px;
+      border: 2px solid transparent;
+    }
+
+    /* Hover state for icon items */
+    .icon-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: #0066cc;
+    }
+
+    /* Active/selected icon state */
+    .icon-item.active {
+      background: rgba(0, 255, 136, 0.2);
+      border-color: #00ff88;
+      box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+    }
+
+    /* Styling for icon images */
+    .icon-item img {
+      width: 30px;
+      height: 30px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 0px solid #555;
+      background: none;
+    }
+
+    /* Default white circle for no icon selected */
+    .icon-item .preview-circle {
+      width: 30px;
+      height: 30px;
+      background: white;
+      border-radius: 50%;
+      border: 2px solid #555;
+    }
+
+    /* RESPONSIVE DESIGN - Adjustments for smaller screens */
+    @media (max-width: 768px) {
+      .icon-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .icon-item img,
+      .icon-item .preview-circle {
+        width: 25px;
+        height: 25px;
+      }
+    }
+    

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css">
+  <title>Carrom Game</title>
+  <style>
+    
+  </style>
+</head>
+<body>
+  <!-- MAIN HTML STRUCTURE -->
+  
+  <!-- Main container holding all three sections -->
+  <div id="main-container">
+    
+    <!-- LEFT PANEL - Player info, game controls, striker selection, and power bar -->
+    <div id="left-panel" class="side-panel">
+      <div class="content-area">
+        
+        <!-- Player information display -->
+        <div class="player-info">
+          <h3 class="red">Player 1</h3>
+          <p>Coins Left: <span id="red-count">9</span></p>
+        </div>
+        <div class="player-info player-divider">
+          <h3 class="blue">Player 2</h3>
+          <p>Coins Left: <span id="blue-count">9</span></p>
+        </div>
+        
+        <!-- Game control buttons section -->
+        <div class="feature-section">
+          <h4>Game Controls</h4>
+          <button id="aimAssistBtn" class="control-btn">Aim Assist</button>
+          <button id="laserAimBtn" class="control-btn">Laser Aim</button>
+          <button id="invertedControlsBtn" class="control-btn">Inverted Shot</button>
+          <button id="pauseBtn" class="control-btn">⏯</button>
+        </div>
+        
+        <!-- Striker icon selection grid -->
+        <div class="striker-icons-section">
+          <h3>Striker Icons:</h3>
+          <div class="icon-grid">
+            <!-- Default white circle (no icon) -->
+            <div class="icon-item active" onclick="striker.setStrikerIcon(0)">
+              <div class="preview-circle"></div>
+            </div>
+            <!-- Custom icon options -->
+            <div class="icon-item" onclick="striker.setStrikerIcon(1)">
+              <img src="assets/vectorstock_25205978.png" alt="Icon 1">
+            </div>
+            <div class="icon-item" onclick="striker.setStrikerIcon(2)">
+              <img src="assets/dogshock copy.png" alt="Icon 2">
+            </div>
+            <div class="icon-item" onclick="striker.setStrikerIcon(3)">
+              <img src="assets/darwin-nunez-ribeiro-smile.png" alt="Icon 3">
+            </div>
+            <div class="icon-item" onclick="striker.setStrikerIcon(4)">
+              <img src="assets/Liverpool_Blue_Coat_School.png" alt="Icon 4">
+            </div>
+            <div class="icon-item" onclick="striker.setStrikerIcon(5)">
+              <img src="assets/footy1.png" alt="Icon 5">
+            </div>
+            <div class="icon-item" onclick="striker.setStrikerIcon(6)">
+              <img src="assets/skull1.png" alt="Icon 6">
+            </div>
+            <div class="icon-item" onclick="striker.setStrikerIcon(7)">
+              <img src="assets/GolemCard copy1.png" alt="Icon 7">
+            </div>
+            <div class="icon-item" onclick="striker.setStrikerIcon(8)">
+              <img src="assets/Mr_Incredible_Is_Red_Now copy1.png" alt="Icon 8">
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+      <!-- Power bar (left)-->
+      <div id="power-bar-left" class="power-bar">
+        <div id="power-fill-left" class="power-fill"></div>
+      </div>
+      
+      <!-- Copyright -->
+      <div class="copyright">© HARAVE STUDIOS 2025</div>
+    </div>
+
+    <!-- GAME CONTAINER - Where the p5.js canvas will be inserted -->
+    <div id="game-container"></div>
+
+    <!-- RIGHT PANEL - Special feature buttons and power bar -->
+    <div id="right-panel" class="side-panel">
+      <div class="content-area">
+        
+        <!-- Special game features section -->
+        <div class="feature-section">
+          <h4>Special Features</h4>
+          <button id="screenshakeBtn" class="control-btn">Screenshake</button>
+          <button id="drunkennessBtn" class="control-btn">Drunkenness</button>
+          <button id="timerBtn" class="control-btn">Shot Timer</button>
+          <button id="bombBtn" class="control-btn">Bombs</button>
+          <button id="noSkillBtn" class="control-btn">No Skill</button>
+          <button id="glitchBtn" class="control-btn">Glitch</button>
+          <button id="stickyBtn" class="control-btn">Sticky Zones</button>
+          <button id="wormholeBtn" class="control-btn">Boundless</button>
+          <button id="wobblyBoardBtn" class="control-btn">Wobbly Board</button>
+          <button id="trampolineBtn" class="control-btn">Bounce Pads</button>
+        </div>
+      </div>
+      
+      <!-- Power bar (right)-->
+      <div id="power-bar-right" class="power-bar">
+        <div id="power-fill-right" class="power-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT IMPORTS - Loading p5.js library and game files -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+  <script src="sketch.js"></script>
+  <script src="coin.js"></script>
+  <script src="Special Features.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.min.js"></script>
+</body>
+</html>
+
+
+
+
